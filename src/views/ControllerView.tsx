@@ -4241,19 +4241,55 @@ function ControllerLibraryPanel({
                           <td className={`text-right font-medium text-slate-400 select-none ${showsLyricContext ? 'px-3 py-3 align-top' : 'px-3 py-1.5'}`}>
                             <span className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                               {item.type === 'song' && (
+                                <>
+                                  <button
+                                    type="button"
+                                    title="Edit song"
+                                    onClick={(event) => {
+                                      event.stopPropagation();
+                                      void (async () => {
+                                        const songWithSlides = await ipcSongService.getById(item.id, primaryRole);
+                                        onOpenSongEditor(songWithSlides);
+                                      })();
+                                    }}
+                                    className="grid h-7 w-7 place-items-center rounded-md text-slate-400 hover:bg-slate-100 hover:text-blue-600 dark:hover:text-blue-400"
+                                  >
+                                    <Edit3 size={14} />
+                                  </button>
+                                  <button
+                                    type="button"
+                                    title="Delete song"
+                                    onClick={(event) => {
+                                      event.stopPropagation();
+                                      if (confirm(`Are you sure you want to delete song "${item.title}"?`)) {
+                                        void (async () => {
+                                          await ipcSongService.delete(item.id);
+                                          void loadSongs();
+                                        })();
+                                      }
+                                    }}
+                                    className="grid h-7 w-7 place-items-center rounded-md text-slate-400 hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-950/40 dark:hover:text-rose-400"
+                                  >
+                                    <Trash2 size={14} />
+                                  </button>
+                                </>
+                              )}
+                              {item.type === 'media' && item.originalMedia && (
                                 <button
                                   type="button"
-                                  title="Edit song"
+                                  title="Delete media file"
                                   onClick={(event) => {
                                     event.stopPropagation();
-                                    void (async () => {
-                                      const songWithSlides = await ipcSongService.getById(item.id, primaryRole);
-                                      onOpenSongEditor(songWithSlides);
-                                    })();
+                                    if (confirm(`Are you sure you want to delete "${item.title}"?`)) {
+                                      void (async () => {
+                                        await ipcMediaService.delete(item.id);
+                                        void loadMedia();
+                                      })();
+                                    }
                                   }}
-                                  className="grid h-7 w-7 place-items-center rounded-md text-slate-400 hover:bg-slate-100 hover:text-blue-600 dark:hover:text-blue-400"
+                                  className="grid h-7 w-7 place-items-center rounded-md text-slate-400 hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-950/40 dark:hover:text-rose-400"
                                 >
-                                  <Edit3 size={14} />
+                                  <Trash2 size={14} />
                                 </button>
                               )}
                               {item.type === 'preset' && item.originalPreset && (
