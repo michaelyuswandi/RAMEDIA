@@ -1,116 +1,134 @@
 # RAMEDIA 🎵
 
-> Modern Church Multimedia Presentation System
+> **Modern Church & Event Multimedia Presentation System**
 
-A next-generation worship presentation application designed for small to medium churches. Built with modern web technologies, RAMEDIA delivers professional-grade multimedia presentations with an intuitive, easy-to-use interface.
+RAMEDIA is a next-generation worship presentation software designed for churches, conferences, and event productions. Built with Electron, React, TypeScript, and Tailwind CSS, RAMEDIA delivers professional-grade multi-display presentations, online media streaming, Bible verse lookup, song preset management, and stage monitor controls with a sleek, ultra-responsive UI.
 
-## ✨ Features
+---
 
-### Core Capabilities
+## ✨ Key Features
 
-- **Song Lyrics Display** - Beautiful typography with customizable styles
-- **Bible Presentation** - Multiple translations with instant verse lookup
-- **Media Backgrounds** - 4K video, images, and animated backgrounds
-- **Layer System** - Professional compositing with multiple overlay layers
-- **Multi-Output** - Support for multiple displays/projectors
+### 🎤 Song Lyrics & Multi-View Presets
+- **Interactive Song Library**: Quick search, tag/favorite management, and playlist organization.
+- **Easy Song Import & Parsing**: Supports direct import from EasyWorship databases/RTF files, as well as auto-detecting verse labels (Verse, Chorus, Bridge, Tag, Chorus 2, etc.) from plain text.
+- **Song View Profiles**: Configure customized display presets tailored for Main Screen, Stage Display, or Online Live Streaming lower-thirds.
+- **On-The-Fly Song Editor**: Interactive canvas editor for positioning, font styling, shadow effects, and background media pairing.
 
-### User Experience
+### 📖 Bible Presentation Engine
+- **Multi-Translation Support**: Download and display offline Bible versions easily.
+- **API & Cloud Integration**: Search and download translations directly via BibleBrain & cloud services.
+- **Instant Verse Lookup**: Quick search by book, chapter, and verse with instant live preview.
+- **Dual Display Modes**: Render verses as full-screen overlays or lower-thirds with customizable themes.
 
-- **Easy Song Import** - Paste lyrics, auto-detect verses with double-enter
-- **Live Preview** - See exactly what will display before going live
-- **Quick Edit** - Customize slides on-the-fly during service
-- **Drag & Drop** - Intuitive media management
+### 🎥 Media & Online Streaming
+- **4K Video & Image Rendering**: Hardware-accelerated background playback with smooth crossfade transitions.
+- **YouTube & Online Media Integration**: Stream YouTube videos directly into presentation slides with custom playback controls.
+- **Audio Deck & BGM Manager**: Integrated background audio player for playback during services and breaks.
+- **Screen Share & Capture Inputs**: Seamless WebRTC display and window capture layer.
 
-### Technical Excellence
+### 🖥️ Multi-Display & Stage Monitor
+- **Multi-Screen Support**: Route distinct outputs to Audience Display, Stage Display (Confidence Monitor), and OBS/Web Stream.
+- **Stage View Customization**: Dedicated stage monitor layouts displaying current slide, next slide preview, clocks, countdown timers, and service alerts.
+- **Quick Alerts & Lower-Third Popovers**: Send instant ticker/banner messages to live outputs without interrupting presentations.
+- **Web Remote Control**: Built-in HTTP/WebRTC server enabling control of presentation slides from tablets, smartphones, or remote browsers.
 
-- **4K Support** - Hardware-accelerated rendering
-- **Cross-Platform** - Windows & macOS
-- **Offline-First** - SQLite database, no internet required
-- **Web-First Dev** - Easy debugging in browser
+---
 
 ## 🏗️ Architecture
 
 ```
-Controller Window          Output Window (4K)
-┌─────────────────┐       ┌─────────────────┐
-│  Preview Live   │  Sync │                 │
-│  ┌─────┬─────┐  │ ────► │   STAGE VIEW    │
-│  │Next │Live │  │  IPC  │   (Fullscreen)  │
-│  └─────┴─────┘  │       │                 │
-│  Library/Editor │       │   Layer Stack   │
-└─────────────────┘       └─────────────────┘
+                 ┌──────────────────────────────────────┐
+                 │      RAMEDIA Controller Window       │
+                 │   (React 18 + Tailwind + Zustand)    │
+                 └──────────────────┬───────────────────┘
+                                    │
+                         IPC / Broadcast Channel
+                                    │
+      ┌─────────────────────────────┼─────────────────────────────┐
+      ▼                             ▼                             ▼
+┌──────────────────┐      ┌──────────────────┐      ┌──────────────────┐
+│ Audience Output  │      │  Stage Display   │      │ Web/OBS Output   │
+│   (Fullscreen)   │      │ (Confidence Mon) │      │   (WebRTC/HTTP)  │
+└──────────────────┘      └──────────────────┘      └──────────────────┘
 ```
+
+---
 
 ## 🛠️ Tech Stack
 
-| Component | Technology                   |
-| --------- | ---------------------------- |
-| Framework | Electron 28+                 |
-| UI        | React 18 + TypeScript        |
-| Styling   | Tailwind CSS + Framer Motion |
-| Database  | SQLite (better-sqlite3)      |
-| ORM       | Drizzle ORM                  |
-| Video     | Native HTML5 Video           |
-| Build     | Vite + electron-builder      |
+| Component | Technology |
+| --------- | ---------- |
+| **Framework** | Electron 28+ |
+| **Frontend** | React 18 + TypeScript |
+| **Styling** | Tailwind CSS + Framer Motion + Lucide Icons |
+| **State Management** | Zustand |
+| **Database** | SQLite (`better-sqlite3` + Drizzle ORM) |
+| **Build System** | Vite + `electron-builder` |
+| **Internationalization** | i18next (English & Indonesian support) |
 
-## 📁 Project Structure
-
-```
-rumedia/
-├── docs/              # Documentation
-├── src/
-│   ├── core/          # Shared business logic
-│   ├── components/    # React components
-│   ├── controller/    # Controller window
-│   ├── output/        # Output/Stage window
-│   ├── sync/          # Cross-window sync
-│   └── platform/      # Platform-specific code
-├── electron/          # Electron main process
-└── public/            # Static assets
-```
+---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js 20+
-- VS Code (recommended)
-- macOS or Windows
+- **Node.js**: v20.x or higher
+- **npm**: v9.x or higher
+- **Operating System**: macOS (ARM64 / x64) or Windows 10/11
 
-### Development
+### Installation & Setup
 
-```bash
-# Install dependencies
-npm install
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/michaelyuswandi/RAMEDIA.git
+   cd RAMEDIA
+   ```
 
-# Start in web mode (recommended for development)
-npm run dev
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-# Start in Electron mode
-npm run electron:dev
+3. **Run in Web Development Mode:**
+   ```bash
+   npm run dev
+   ```
+   - Controller Interface: `http://localhost:5173/controller`
+   - Audience Output: `http://localhost:5173/output`
 
-# Build for production
-npm run build
-```
-
-### Web Development Mode
-
-Open two browser tabs:
-
-- Controller: `http://localhost:5173/controller`
-- Output: `http://localhost:5173/output`
-
-## 📖 Documentation
-
-- [Architecture](docs/architecture.md)
-- [Features](docs/features.md)
-- [Database Schema](docs/database-schema.md)
-- [UI Concept](docs/ui-concept.md)
-
-## 📄 License
-
-MIT License - Created for the church community
+4. **Run in Electron Desktop App Mode:**
+   ```bash
+   npm run electron:dev
+   ```
 
 ---
 
-**RAMEDIA** - Making worship presentation beautiful and effortless 🙏
+## 📦 Building & Distribution
+
+Build production binaries for macOS or Windows:
+
+```bash
+# Package for macOS (ARM64)
+npm run pack:mac
+
+# Create Installer for macOS (.dmg / .zip)
+npm run dist:mac
+
+# Package & Create Installer for Windows (.exe / portable)
+npm run dist:win
+```
+
+Target output installers will be generated under the `release/` directory.
+
+---
+
+## 📄 License
+
+This project is licensed under the **GNU General Public License v3.0 (GPLv3)**.  
+See the [LICENSE](LICENSE) file for full legal details.
+
+---
+
+<p center align="center">
+  <b>RAMEDIA</b> — Elevating Worship & Event Multimedia Experiences 🙏
+</p>
