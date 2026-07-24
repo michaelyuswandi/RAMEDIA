@@ -485,16 +485,30 @@ export default function SchedulePanel({ onOpenScheduleManager, onOpenSongEditor 
                   )}
                 </div>
 
-                {/* More Options */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleContextMenu(e, item.id);
-                  }}
-                  className="shrink-0 rounded p-1 text-text/40 opacity-0 transition-all duration-150 hover:bg-text/10 hover:text-text group-hover:opacity-100"
-                >
-                  <MoreVertical size={12} />
-                </button>
+                {/* Actions: Delete & More Options */}
+                <div className="shrink-0 flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-all duration-150">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      deleteItem(item.id);
+                      toast.success(t('schedulePanel.itemDeleted', { defaultValue: 'Item removed from rundown' }));
+                    }}
+                    className="rounded p-1 text-text/40 hover:bg-red-500/15 hover:text-red-400 transition-colors"
+                    title={t('common.delete')}
+                  >
+                    <Trash2 size={12} />
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleContextMenu(e, item.id);
+                    }}
+                    className="rounded p-1 text-text/40 hover:bg-text/10 hover:text-text transition-colors"
+                    title={t('common.moreOptions', { defaultValue: 'More options' })}
+                  >
+                    <MoreVertical size={12} />
+                  </button>
+                </div>
               </div>
             );
           })
