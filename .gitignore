@@ -1,0 +1,11 @@
+node_modules
+dist
+dist-electron
+release
+*.db
+*.db-shm
+*.db-wal
+.DS_Store
+*.log
+.commandcode
+Data-1

@@ -1,0 +1,136 @@
+{
+  "name": "ramedia",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist-electron/bootstrap.js",
+  "scripts": {
+    "clean": "node scripts/clean.mjs",
+    "dev": "AppMode=web vite",
+    "electron:dev": "vite",
+    "web": "AppMode=web vite",
+    "typecheck": "tsc --noEmit",
+    "build": "npm run clean && tsc && vite build",
+    "build:electron": "tsc && vite build",
+    "pack:mac": "npm run build:electron && electron-builder --mac --arm64 dir",
+    "dist:mac": "npm run build:electron && electron-builder --mac --arm64",
+    "dist:mac:universal": "npm run build:electron && electron-builder --mac universal",
+    "pack:win": "npm run build:electron && electron-builder --win dir",
+    "dist:win": "npm run build:electron && electron-builder --win",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "extract-bible": "tsx scripts/extract-bible.ts"
+  },
+  "build": {
+    "appId": "com.ramedia.app",
+    "productName": "RAMedia",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "resources",
+        "to": "resources",
+        "filter": ["**/*"]
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "iconra.png",
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "RAMEDIA"
+    },
+    "mac": {
+      "category": "public.app-category.entertainment",
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["arm64", "x64"]
+        },
+        {
+          "target": "zip",
+          "arch": ["arm64", "x64"]
+        }
+      ],
+      "icon": "iconra.png",
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.17",
+    "better-sqlite3": "^12.6.2",
+    "drizzle-orm": "^0.45.1",
+    "pako": "^2.1.0",
+    "paradox.js": "^0.2.0"
+  },
+  "devDependencies": {
+    "@phosphor-icons/react": "^2.1.10",
+    "@types/adm-zip": "^0.5.8",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/pako": "^2.0.4",
+    "@types/react": "^18.2.56",
+    "@types/react-dom": "^18.2.19",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.17",
+    "clsx": "^2.1.1",
+    "drizzle-kit": "^0.31.8",
+    "electron": "^43.1.1",
+    "electron-builder": "^26.0.12",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "framer-motion": "^11.0.3",
+    "lucide-react": "^0.330.0",
+    "pdfjs-dist": "^5.6.205",
+    "postcss": "^8.4.35",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-resizable-panels": "^4.6.0",
+    "react-router-dom": "^6.22.1",
+    "tailwind-merge": "^2.6.1",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.4",
+    "vite-plugin-electron": "^0.29.0",
+    "vite-plugin-electron-renderer": "^0.14.6",
+    "zustand": "^4.5.1"
+  }
+}
