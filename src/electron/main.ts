@@ -2349,6 +2349,14 @@ const createMainWindow = () => {
     win.focus();
   });
 
+  win.webContents.on('did-finish-load', () => {
+    if (!win.isVisible()) {
+      if (savedState?.isMaximized ?? true) win.maximize();
+      win.show();
+      win.focus();
+    }
+  });
+
   let saveStateTimer: NodeJS.Timeout | null = null;
   const scheduleStateSave = () => {
     if (saveStateTimer) clearTimeout(saveStateTimer);
