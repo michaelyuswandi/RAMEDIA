@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAMEDIA — Modern Church & Event Presentation Software</title>
+  <meta name="description" content="Free & Open Source multimedia presentation system for churches and live events. Free alternative to ProPresenter & EasyWorship. Multi-screen, Bible verse lookup, song lyrics, 4K media, stage display, and web remote control.">
+  <meta name="keywords" content="church presentation software, propresenter alternative, easyworship alternative, worship lyrics, bible presentation, open source church tech, stage monitor">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="RAMEDIA — Modern Church & Event Presentation Software">
+  <meta property="og:description" content="Free & Open Source multimedia presentation system for churches and live events. Multi-screen, Bible lookup, song lyrics, 4K media, and web remote.">
+  <meta property="og:url" content="https://michaelyuswandi.github.io/RAMEDIA/">
+
+  <!-- Fonts & Tailwind CSS CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #ec4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-bg {
+      background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen selection:bg-blue-500 selection:text-white flex flex-col justify-between">
+
+  <!-- Header / Navigation -->
+  <header class="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-purple-500 p-0.5 flex items-center justify-center shadow-lg shadow-blue-500/20">
+          <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center font-extrabold text-blue-400 text-lg">
+            🎵
+          </div>
+        </div>
+        <span class="text-2xl font-black tracking-tight text-white">RAMEDIA</span>
+        <span class="px-2.5 py-0.5 text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full">v0.1.0 Open Source</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#features" class="hover:text-blue-400 transition-colors">Features</a>
+        <a href="#downloads" class="hover:text-blue-400 transition-colors">Downloads</a>
+        <a href="#architecture" class="hover:text-blue-400 transition-colors">Architecture</a>
+        <a href="https://github.com/michaelyuswandi/RAMEDIA" target="_blank" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all border border-slate-700">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub Repository
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="gradient-bg">
+    <!-- Hero Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-wider mb-8">
+        ✨ Free & Open Source ProPresenter & EasyWorship Alternative
+      </div>
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+        Elevate Your Church <br><span class="gradient-text">Multimedia Presentations</span>
+      </h1>
+      <p class="max-w-3xl mx-auto text-lg sm:text-xl text-slate-400 mb-10 font-normal leading-relaxed">
+        RAMEDIA is a fast, intuitive, and modern presentation system built for churches and live productions. Manage lyrics, scripture, 4K videos, stage displays, and live streams with total confidence.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div id="downloads" class="flex flex-wrap justify-center gap-4 mb-16">
+        <a href="https://github.com/michaelyuswandi/RAMEDIA/releases/download/v0.1.0/RAMedia-0.1.0-mac-arm64.dmg" class="flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white font-bold px-7 py-4 rounded-xl shadow-lg shadow-blue-500/25 transition-all text-base">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 3.5c.62-.76 1.05-1.81.93-2.87-.9.04-2.01.6-2.65 1.34-.57.65-1.07 1.71-.93 2.74 1.01.08 2.03-.45 2.65-1.21z"/></svg>
+          Download for Mac (ARM64)
+        </a>
+        <a href="https://github.com/michaelyuswandi/RAMEDIA/releases/download/v0.1.0/RAMedia-0.1.0-win-x64.exe" class="flex items-center gap-3 bg-slate-800 hover:bg-slate-700 text-white font-bold px-7 py-4 rounded-xl border border-slate-700 shadow-lg transition-all text-base">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.95-9.615L24 0v11.4H10.95M0 12.6h9.75v9.451L0 20.699M10.95 12.6H24V24l-13.05-1.835"/></svg>
+          Download for Windows (.exe)
+        </a>
+        <a href="https://github.com/michaelyuswandi/RAMEDIA/releases/tag/v0.1.0" class="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-slate-300 font-semibold px-5 py-4 rounded-xl border border-slate-800 transition-all text-sm">
+          All Releases (Intel Mac, Linux) &rarr;
+        </a>
+      </div>
+
+      <!-- Feature Cards Grid -->
+      <div id="features" class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mt-20">
+        <div class="glass-card p-8 rounded-2xl">
+          <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-2xl mb-6">
+            🎵
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Song Lyrics & Presets</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Auto-detect verse tags, import EasyWorship files, and set customized display presets for Main Screen, Stage Display, or Lower-Thirds.
+          </p>
+        </div>
+
+        <div class="glass-card p-8 rounded-2xl">
+          <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-2xl mb-6">
+            📖
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Bible Verse Engine</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Instant verse lookup with multi-translation support. Download offline Bibles directly via BibleBrain & cloud API integration.
+          </p>
+        </div>
+
+        <div class="glass-card p-8 rounded-2xl">
+          <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/20 text-pink-400 flex items-center justify-center font-bold text-2xl mb-6">
+            🖥️
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Stage Monitor & Web Remote</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Confidence monitor layout with current/next slide previews, countdown timers, quick lower-third alerts, and web-based remote control.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture & Comparison Section -->
+    <section id="architecture" class="border-t border-slate-800/80 bg-slate-950/60 py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Designed for Speed & Stability</h2>
+          <p class="text-slate-400 max-w-2xl mx-auto">Built on top of Electron 28, React 18, and SQLite for maximum offline reliability during live service production.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div class="space-y-6">
+            <div class="flex gap-4 items-start">
+              <div class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center shrink-0">1</div>
+              <div>
+                <h4 class="text-lg font-bold text-white mb-1">Multi-Output Sync</h4>
+                <p class="text-slate-400 text-sm">Synchronize Main Projection, Stage Monitor, and Web Stream outputs seamlessly without lag.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 font-bold flex items-center justify-center shrink-0">2</div>
+              <div>
+                <h4 class="text-lg font-bold text-white mb-1">YouTube & 4K Background Media</h4>
+                <p class="text-slate-400 text-sm">Play 4K background videos or embed live YouTube streams directly into slide layers.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="w-8 h-8 rounded-full bg-pink-500/20 text-pink-400 font-bold flex items-center justify-center shrink-0">3</div>
+              <div>
+                <h4 class="text-lg font-bold text-white mb-1">Free & Open Source Forever</h4>
+                <p class="text-slate-400 text-sm">Licensed under GNU GPLv3. Free for small, medium, and large churches worldwide.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card p-8 rounded-3xl border border-slate-800">
+            <h3 class="text-xl font-bold text-white mb-6">RAMEDIA vs Traditional Tools</h3>
+            <ul class="space-y-4 text-sm text-slate-300">
+              <li class="flex items-center justify-between py-2 border-b border-slate-800">
+                <span>Cost / License</span>
+                <span class="font-bold text-emerald-400">100% Free (GPLv3)</span>
+              </li>
+              <li class="flex items-center justify-between py-2 border-b border-slate-800">
+                <span>Cross Platform</span>
+                <span class="font-semibold text-white">macOS, Windows, Linux</span>
+              </li>
+              <li class="flex items-center justify-between py-2 border-b border-slate-800">
+                <span>Web Remote Control</span>
+                <span class="font-semibold text-emerald-400">Included</span>
+              </li>
+              <li class="flex items-center justify-between py-2">
+                <span>YouTube Player Layer</span>
+                <span class="font-semibold text-emerald-400">Included</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800/80 bg-slate-950 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+      <div>&copy; 2026 RAMEDIA Project. Released under GNU GPLv3 License.</div>
+      <div class="flex items-center gap-6">
+        <a href="https://github.com/michaelyuswandi/RAMEDIA" class="hover:text-slate-300 transition-colors">GitHub Repository</a>
+        <a href="https://github.com/michaelyuswandi/RAMEDIA/releases" class="hover:text-slate-300 transition-colors">Releases & Download</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

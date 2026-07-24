@@ -2,6 +2,8 @@
   "name": "ramedia",
   "private": true,
   "version": "0.1.0",
+  "author": "Michael Yuswandi <michaelyuswandi@gmail.com>",
+  "description": "Modern Church & Event Multimedia Presentation System",
   "type": "module",
   "main": "dist-electron/bootstrap.js",
   "scripts": {
@@ -17,6 +19,8 @@
     "dist:mac:universal": "npm run build:electron && electron-builder --mac universal",
     "pack:win": "npm run build:electron && electron-builder --win dir",
     "dist:win": "npm run build:electron && electron-builder --win",
+    "dist:linux": "npm run build:electron && electron-builder --linux",
+    "dist:all": "npm run build:electron && electron-builder --mac --arm64 --x64 && electron-builder --win --x64 && electron-builder --linux AppImage deb",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "extract-bible": "tsx scripts/extract-bible.ts"
   },
@@ -37,6 +41,12 @@
         "filter": ["**/*"]
       }
     ],
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "category": "AudioVideo",
+      "icon": "iconra.png",
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}"
+    },
     "win": {
       "target": [
         {
