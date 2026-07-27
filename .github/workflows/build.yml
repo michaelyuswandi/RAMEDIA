@@ -8,6 +8,9 @@ on:
       - 'v*'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build-windows:
     runs-on: windows-latest
@@ -36,7 +39,6 @@ jobs:
           name: RAMEDIA-Windows-x64
           path: release/*.exe
 
-  # (Opsional) Build untuk macOS jika dibutuhkan
   build-mac:
     runs-on: macos-latest
 
@@ -63,3 +65,27 @@ jobs:
         with:
           name: RAMEDIA-macOS-arm64
           path: release/*.dmg
+
+  publish-release:
+    needs: [build-windows, build-mac]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - name: Download Windows Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: RAMEDIA-Windows-x64
+          path: release-files
+
+      - name: Download macOS Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: RAMEDIA-macOS-arm64
+          path: release-files
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release-files/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
