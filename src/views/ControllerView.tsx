@@ -4264,7 +4264,7 @@ function ControllerLibraryPanel({
                                       if (confirm(`Are you sure you want to delete song "${item.title}"?`)) {
                                         void (async () => {
                                           await ipcSongService.delete(item.id);
-                                          void loadSongs();
+                                          void loadSongPage(0, false);
                                         })();
                                       }
                                     }}
@@ -4283,7 +4283,7 @@ function ControllerLibraryPanel({
                                     if (confirm(`Are you sure you want to delete "${item.title}"?`)) {
                                       void (async () => {
                                         await ipcMediaService.delete(item.id);
-                                        void loadMedia();
+                                        void loadMediaPage(0, false);
                                       })();
                                     }
                                   }}
